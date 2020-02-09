@@ -8,9 +8,7 @@ const Wrapper = styled.div`
   height: 20rem;
 `;
 
-function PieChart({ datas, done }) {
-  const [toggle, setToggle] = useState([]);
-
+function PieChart({ datas }) {
   const data = datas && datas !== null ? datas : PieChartDatas;
   const fill = id => ({
     match: {
@@ -18,20 +16,9 @@ function PieChart({ datas, done }) {
     },
     id: "dots",
   });
-  const doneData = done && done.map(item => fill(item.id));
-  console.log(
-    "pie chart's datas: ",
-    datas.map(item => item.done === true),
-  );
-  console.log(done);
-  const fillToggle =
-    datas &&
-    datas.map(item => item.done === true) &&
-    datas.map(item => fill(item.id));
-
-  useEffect(() => {
-    fill();
-  }, [done]);
+  const toggleData =
+    datas && datas.filter(todo => todo.done === true).map(item => item.id);
+  const toggle = toggleData && toggleData.map(item => fill(item));
 
   return (
     <Wrapper>
@@ -68,7 +55,7 @@ function PieChart({ datas, done }) {
             stagger: true,
           },
         ]}
-        fill={doneData}
+        fill={toggle}
         legends={[
           {
             anchor: "bottom",

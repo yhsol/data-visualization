@@ -4,7 +4,6 @@ import PieChart from "../../nivo/PieChart";
 
 function Todos() {
   const [todos, setTodos] = useState([]);
-  const [done, setDone] = useState([]);
   const [todo, setTodo] = useState({
     id: "",
     label: "",
@@ -50,7 +49,6 @@ function Todos() {
         todo.id === `${name}` ? { ...todo, done: !todo.done } : todo,
       ),
     );
-    setDone(todos.filter(todo => todo.done === true));
   };
 
   const onRemove = e => {
@@ -79,7 +77,7 @@ function Todos() {
           </div>
         ))}
       </ul>
-      <PieChart datas={todos} done={done} />
+      <PieChart datas={todos} />
     </>
   );
 }
