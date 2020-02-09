@@ -1,0 +1,92 @@
+// action type
+const ADD_ID = "todos/ADD_ID" as const;
+const ADD_LABEL = "todos/ADD_LABEL" as const;
+const ADD_VALUE = "todos/ADD_VALUE" as const;
+const TOGGLE_TODO = "todos/TOGGLE_TODO" as const;
+const REMOVE_TODO = "todos/REMOVE_TODO" as const;
+
+// action creator
+export const addId = (id: string) => ({
+  type: ADD_ID,
+  payload: id,
+});
+
+export const addLabel = (label: string) => ({
+  type: ADD_LABEL,
+  payload: label,
+});
+
+export const addValue = (value: number) => ({
+  type: ADD_VALUE,
+  payload: value,
+});
+
+export const toggleTodo = (id: string) => ({
+  type: TOGGLE_TODO,
+  payload: id,
+});
+
+export const removeTodo = (id: string) => ({
+  type: REMOVE_TODO,
+  payload: id,
+});
+
+// typesciprt type for actions
+type TodosAction =
+  | ReturnType<typeof addId>
+  | ReturnType<typeof addLabel>
+  | ReturnType<typeof addValue>
+  | ReturnType<typeof toggleTodo>
+  | ReturnType<typeof removeTodo>;
+
+// type for state
+export type Todo = {
+  id: string;
+  label: string;
+  value: number;
+  done: boolean;
+};
+type TodosState = Todo[];
+
+const initialState: TodosState = [];
+
+function todos(
+  state: TodosState = initialState,
+  action: TodosAction,
+): TodosState {
+  switch (action.type) {
+    case ADD_ID:
+      return state.concat({
+        ...state,
+        id: action.payload,
+        done: false,
+      });
+    case ADD_LABEL:
+      return state.concat({
+        ...state,
+        label: action.payload,
+        done: false,
+      });
+    case ADD_VALUE:
+      return state.concat({
+        ...state,
+        value: action.payload,
+        done: false,
+      });
+    case TOGGLE_TODO:
+      return state.map(todo =>
+        todo.id === action.payload
+          ? {
+              ...todo,
+              done: !todo.done,
+            }
+          : todo,
+      );
+    case REMOVE_TODO:
+      return state.filter(todo => todo.id !== action.payload);
+    default:
+      return state;
+  }
+}
+
+export default todos;

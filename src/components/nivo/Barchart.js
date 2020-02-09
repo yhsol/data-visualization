@@ -23,7 +23,7 @@ function BarChart() {
     <Wrapper>
       <ResponsiveBar
         data={data}
-        keys={dataKeys}
+        keys={dataKeys.slice(1, 4)}
         indexBy="country"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}

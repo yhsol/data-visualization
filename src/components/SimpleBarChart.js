@@ -15,9 +15,10 @@ import styled from "styled-components";
 
 function SimpleBarChart() {
   const datas = [
-    { a: "a", b: 0 },
+    { a: "a", b: 2 },
     { a: "b", b: 1 },
-    { a: "c", b: 5 },
+    { a: "c", b: 2 },
+    { a: "all", b: 5 },
   ];
   const data = datas.map(item => ({ x: item.a, y: item.b }));
   console.log(data);
