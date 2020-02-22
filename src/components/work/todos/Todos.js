@@ -53,25 +53,39 @@ function Todos() {
 
   const onRemove = e => {
     const { name } = e.target;
-    setTodos(todos.filter(todo => todo.id !== `${name}`));
+    setTodos(todos.filter(todo => todo.id !== name));
   };
-  console.log(todos);
   return (
     <>
       <Form onSubmit={onSubmit}>
-        <Input value={todo.id} onChange={onChange} name="id" />
-        <Input value={todo.label} onChange={onChange} name="label" />
-        <Input value={todo.value} onChange={onChange} name="value" />
+        <Input
+          value={todo.id}
+          onChange={onChange}
+          name="id"
+          placeholder="이름"
+        />
+        <Input
+          value={todo.label}
+          onChange={onChange}
+          name="label"
+          placeholder="설명"
+        />
+        <Input
+          value={todo.value}
+          onChange={onChange}
+          name="value"
+          placeholder="기간"
+        />
         <Button onClick={onClick}>등록</Button>
       </Form>
       <ul>
         {todos.map(item => (
           <div key={item.id}>
             <span>{item.id}</span>
-            <Button onClick={onToggle} name={`${item.id}`}>
+            <Button onClick={onToggle} name={item.id}>
               V
             </Button>
-            <Button onClick={onRemove} name={`${item.id}`}>
+            <Button onClick={onRemove} name={item.id}>
               X
             </Button>
           </div>

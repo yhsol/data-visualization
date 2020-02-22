@@ -4,8 +4,8 @@ import { PieChartDatas } from "../Datas";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  width: 23rem;
-  height: 20rem;
+  width: 100%;
+  height: 100%;
 `;
 
 function PieChart({ datas }) {
