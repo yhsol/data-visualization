@@ -1,12 +1,24 @@
 import React, { useState, useRef } from "react";
 import Todos from "./work/todos/Todos";
-import { Input, Button, Form } from "antd";
+import { Input, Button, Form, Row, Col } from "antd";
 import styled from "styled-components";
+
+const FormWrapper = styled(Form)`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
 
 const SpaceGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 500px;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const SpaceWrapper = styled.div`
@@ -48,7 +60,7 @@ function Board() {
 
   return (
     <div>
-      <Form onSubmit={onSubmit}>
+      <FormWrapper onSubmit={onSubmit}>
         <Input
           value={space.name}
           onChange={onChange}
@@ -56,7 +68,7 @@ function Board() {
           placeholder="워크 스페이스"
         />
         <Button onClick={onClick}>등록</Button>
-      </Form>
+      </FormWrapper>
       <SpaceGrid>
         {spaces.map(item => (
           <SpaceWrapper key={item.id}>
