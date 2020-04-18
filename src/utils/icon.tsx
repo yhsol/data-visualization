@@ -1,6 +1,6 @@
 import React from "react";
 
-export const PlayIcon = (fill: any = "inherit") => (
+export const PlayIcon = ({ fill }: { fill?: any }) => (
   <svg
     width="24"
     height="24"

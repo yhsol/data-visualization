@@ -5,12 +5,18 @@ import DeepWork from "./components/DeepWork";
 import Header from "./components/Header";
 import Board from "./components/Board";
 import Layout from "./components/Layout";
+import GlobalStyles from "./utils/GlobalStyles";
+import { ThemeProvider } from "styled-components";
+import Theme from "./utils/Theme";
 
 function App() {
   return (
-    <>
-      <Layout />
-    </>
+    <ThemeProvider theme={Theme}>
+      <>
+        <GlobalStyles />
+        <Layout />
+      </>
+    </ThemeProvider>
   );
 }
 

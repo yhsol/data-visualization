@@ -17,7 +17,10 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+
+import styled from "styled-components";
 import { PlayIcon } from "../utils/icon";
+import { Colors } from "../utils/Colors";
 
 const drawerWidth = 240;
 
@@ -32,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      backgroundColor: "#5551FF",
+      backgroundColor: Colors.purple,
       color: "white",
     },
     appBarShift: {
@@ -86,6 +89,22 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const Style = {
+  header: styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    font-size: 24px;
+  `,
+  ListItemText: styled(ListItemText)`
+    color: ${(props) => props.theme.green};
+    span {
+      font-weight: bolder;
+    }
+  `,
+};
+
 export default function Layout() {
   const classes = useStyles();
   const theme = useTheme();
@@ -120,7 +139,7 @@ export default function Layout() {
           >
             <PlayIcon fill={"white"} />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap style={{ color: "white" }}>
             Router Title
           </Typography>
         </Toolbar>
@@ -139,11 +158,18 @@ export default function Layout() {
         }}
         open={open}
       >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? <PlayIcon /> : <PlayIcon />}
-          </IconButton>
-        </div>
+        <Style.header>
+          <h1>TITLE</h1>
+          <div className={classes.toolbar}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <PlayIcon fill={Colors.green} />
+              ) : (
+                <PlayIcon fill={Colors.green} />
+              )}
+            </IconButton>
+          </div>
+        </Style.header>
         <Divider />
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
@@ -151,7 +177,7 @@ export default function Layout() {
               <ListItemIcon>
                 {index % 2 === 0 ? <PlayIcon /> : <PlayIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <Style.ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
@@ -162,7 +188,7 @@ export default function Layout() {
               <ListItemIcon>
                 {index % 2 === 0 ? <PlayIcon /> : <PlayIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <Style.ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
