@@ -18,6 +18,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
+
 import styled from "styled-components";
 import { PlayIcon } from "../utils/icon";
 import { Colors } from "../utils/Colors";
@@ -86,6 +89,12 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(3),
     },
+    breadcrumbs: {
+      "& > * + *": {
+        marginTop: theme.spacing(2),
+      },
+      marginBottom: "2rem",
+    },
   }),
 );
 
@@ -118,6 +127,11 @@ export default function Layout() {
     setOpen(false);
   };
 
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -140,7 +154,7 @@ export default function Layout() {
             <PlayIcon fill={"white"} />
           </IconButton>
           <Typography variant="h6" noWrap style={{ color: "white" }}>
-            Router Title
+            each router's title from props
           </Typography>
         </Toolbar>
       </AppBar>
@@ -195,6 +209,21 @@ export default function Layout() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <div className={classes.breadcrumbs}>
+          <Breadcrumbs separator="›" aria-label="breadcrumb">
+            <Link color="inherit" href="/" onClick={handleClick}>
+              Material-UI
+            </Link>
+            <Link
+              color="inherit"
+              href="/getting-started/installation/"
+              onClick={handleClick}
+            >
+              Core
+            </Link>
+            <Typography color="textPrimary">Breadcrumb</Typography>
+          </Breadcrumbs>
+        </div>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
